@@ -17,13 +17,13 @@ Opening it opens the target in the same tab. The target contains the canonical c
 1. Run `npm ci` and `npm run build` (Node.js 18 or newer).
 2. Create `<vault>/.obsidian/plugins/symlink-notes/`.
 3. Copy `main.js` and `manifest.json` into that folder.
-4. Reload Obsidian and enable **Symlink Notes** in Settings → Community plugins.
+4. Reload Obsidian and enable **Symlink Notes** in **Settings** → **Community plugins**.
 
 The generated `main.js` is the desktop/mobile plugin bundle. No stylesheet or runtime npm dependencies are needed. Build on a computer, then copy those two files to a mobile vault to install there.
 
 ## Use
 
-Open a Markdown note and run **Symlink Notes: Create symlink to current note** from the command palette. Choose an existing folder, or `/ (vault root)`. The shortcut uses the current note's filename. Creation leaves the current note open and refuses to overwrite an existing file or folder. Paths in generated YAML are quoted to preserve special characters.
+Open a Markdown note and run **Symlink Notes: Create symlink to current note** from the command palette. Choose an existing folder, or `/ (vault root)`. The shortcut uses the active note's filename. Creation leaves the active note open and refuses to overwrite an existing file or folder. Paths in generated YAML are quoted to preserve special characters.
 
 Renaming or moving a target, including moving its containing folder, updates the `symlink` property of incoming shortcuts. Other properties and the note body are preserved; Obsidian may reformat YAML during its frontmatter update. Moving a shortcut itself leaves its target unchanged. Targets must be moved while the plugin is enabled for automatic updates to occur.
 
@@ -36,10 +36,14 @@ To repair a broken shortcut, edit its frontmatter and reopen it. Working shortcu
 - Uses public Obsidian workspace, vault, metadata, and YAML APIs. No filesystem symlinks or Node.js APIs run in the plugin.
 - Startup builds an in-memory index; file and metadata events maintain it. Navigation reads only the opened note and its chain, without scanning the vault.
 - Redirects use the existing Markdown leaf, preserving its editor mode and avoiding focus changes for background tabs. Public navigation events run after opening, so a brief glimpse of the shortcut is possible. Native history can retain a shortcut entry, which will redirect again when opened.
-- Frontmatter changes are limited to `symlink`. Backlinks, search, graph, File Explorer, and Quick Switcher use Obsidian's normal behavior.
+- Frontmatter changes are limited to `symlink`. Backlinks, search, graph, File explorer, and Quick switcher use Obsidian's normal behavior.
 - Absolute paths, URLs, `.`/`..` paths, attachments, and folder targets are unsupported.
 
 Public API reference: [Obsidian TypeScript definitions](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+
+## License
+
+Symlink Notes is licensed under the [MIT License](LICENSE).
 
 ## Development and verification
 
@@ -56,7 +60,7 @@ Tests use Node's test runner with an in-memory Obsidian API mock and real YAML p
 Manual smoke test in a disposable desktop/mobile vault:
 
 1. Create `Problems/Target.md` with some body text and a `Household` folder. Use the command to create `Household/Target.md`.
-2. Open the shortcut from File Explorer, Quick Switcher, and an internal link. Check current, split, and new/background tabs; verify the target opens without unrelated tabs closing.
+2. Open the shortcut from File explorer, Quick switcher, and an internal link. Check current, split, and new/background tabs; verify the target opens without unrelated tabs closing.
 3. Repeat creation in `Household`; verify the existing shortcut is unchanged. Try the vault root as a destination.
 4. Rename the target, move it to another folder, then move its containing folder. Inspect the shortcut frontmatter and verify unrelated properties/body content survive.
 5. Move the shortcut, then rename the target again. Verify the shortcut still follows it.
