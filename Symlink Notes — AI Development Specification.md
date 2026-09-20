@@ -2,13 +2,13 @@
 
 ## 1. Purpose
 
-Build a small Obsidian community plugin that provides **symlink-like behavior for notes** without using operating-system symlinks and without replacing Obsidian's built-in File Explorer.
+Build a small Obsidian community plugin that provides **symlink-like behavior for notes** without using operating-system symlinks and without replacing Obsidian's built-in File explorer.
 
 The plugin represents a symlink as an ordinary Markdown file containing frontmatter that points to another Markdown file in the same vault.
 
 When a user opens the symlink note, the plugin should transparently open the target note instead.
 
-The design should remain deliberately small and rely on Obsidian's existing filesystem, File Explorer, editor, and navigation behavior wherever possible.
+The design should remain deliberately small and rely on Obsidian's existing filesystem, File explorer, editor, and navigation behavior wherever possible.
 
 ---
 
@@ -76,7 +76,7 @@ Do not create operating-system symlinks.
 
 Do not create virtual filesystem objects.
 
-Do not replace Obsidian's File Explorer.
+Do not replace Obsidian's File explorer.
 
 ---
 
@@ -300,7 +300,7 @@ Provide a command:
 Create symlink to current note
 ```
 
-The command should operate on the currently active Markdown file.
+The command should operate on the active Markdown file.
 
 The user selects where the shortcut should be created.
 
@@ -538,7 +538,7 @@ Then display a notice:
 Symlink created in Household
 ```
 
-Do not automatically navigate away from the current note.
+Do not automatically navigate away from the active note.
 
 ---
 
@@ -759,7 +759,7 @@ or equivalent APIs.
 
 ---
 
-### No custom File Explorer
+### No custom File explorer
 
 Do not recreate Obsidian's sidebar tree.
 
@@ -805,9 +805,9 @@ That is acceptable for version 0.1.
 
 ---
 
-### No Quick Switcher interception
+### No Quick switcher interception
 
-Symlink files may appear separately in the Quick Switcher.
+Symlink files may appear separately in the Quick switcher.
 
 That is acceptable for version 0.1.
 
@@ -1172,11 +1172,11 @@ Do not implement these during the initial MVP unless specifically requested.
 
 Possible later features include:
 
-- Context-menu item in File Explorer
+- Context-menu item in File explorer
 - `Create symlink here`
 - Custom shortcut names
 - Change target command
-- Locate all shortcuts pointing to current note
+- Locate all shortcuts pointing to active note
 - Reveal shortcut files
 - Broken-link diagnostics
 - Broken-link repair interface
@@ -1216,7 +1216,7 @@ When implementing this specification:
 - Avoid `any` unless an Obsidian API genuinely requires it.
 - Do not invent undocumented Obsidian APIs.
 - Do not monkey-patch core plugins.
-- Do not manipulate Obsidian's internal File Explorer DOM.
+- Do not manipulate Obsidian's internal File explorer DOM.
 - Do not use OS-specific symlink functionality.
 - Do not silently change user files beyond the required frontmatter edits.
 - Preserve unrelated frontmatter when modifying `symlink`.
