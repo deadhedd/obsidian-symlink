@@ -13,7 +13,7 @@ Pre-submission checklist for Symlink Notes.
 - [x] Minify production builds by adding `minify: !watch` to `esbuild.config.mjs`.
 - [x] Verify `minAppVersion`.
   - [x] Confirm `1.5.7` as the minimum required version from documented Obsidian API availability.
-- [ ] Decide whether to change the manifest author from `Symlink Notes contributors` to `deadhedd`.
+- [x] Decide whether to change the manifest author from `Symlink Notes contributors` to `deadhedd`.
 
 ## Verification
 

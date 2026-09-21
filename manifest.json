@@ -4,6 +4,6 @@
   "version": "0.1.0",
   "minAppVersion": "1.5.7",
   "description": "Create portable Markdown shortcuts that open their target notes and follow target renames.",
-  "author": "Symlink Notes contributors",
+  "author": "deadhedd",
   "isDesktopOnly": false
 }
