@@ -11,9 +11,8 @@ Pre-submission checklist for Symlink Notes.
   - [ ] Move the initial index rebuild behind `workspace.onLayoutReady()`.
   - [ ] Register vault event handlers after layout is ready, especially `vault.on('create', ...)`.
 - [ ] Minify production builds by adding `minify: !watch` to `esbuild.config.mjs`.
-- [ ] Verify `minAppVersion`.
-  - [ ] Keep `1.5.7` only if compatibility with Obsidian 1.5.7 has been tested.
-  - [ ] Otherwise raise it to the oldest version actually verified.
+- [x] Verify `minAppVersion`.
+  - [x] Confirm `1.5.7` as the minimum required version from documented Obsidian API availability.
 - [ ] Decide whether to change the manifest author from `Symlink Notes contributors` to `deadhedd`.
 
 ## Verification
