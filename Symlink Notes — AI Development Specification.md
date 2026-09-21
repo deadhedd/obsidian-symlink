@@ -297,7 +297,7 @@ Avoid creating redirect loops that make the broken shortcut impossible to edit.
 Provide a command:
 
 ```text
-Create symlink to current note
+Create symlink to active note
 ```
 
 The command should operate on the active Markdown file.
@@ -507,7 +507,7 @@ Problems/Weak Bedroom Wi-Fi.md
 Runs:
 
 ```text
-Create symlink to current note
+Create symlink to active note
 ```
 
 Plugin displays a folder picker.
@@ -701,7 +701,7 @@ Keep it small.
 Version 0.1 requires one primary command:
 
 ```text
-Create symlink to current note
+Create symlink to active note
 ```
 
 Optional convenience commands MAY include:
@@ -1000,7 +1000,7 @@ Problems/Target.md
 open, running:
 
 ```text
-Create symlink to current note
+Create symlink to active note
 ```
 
 and choosing:

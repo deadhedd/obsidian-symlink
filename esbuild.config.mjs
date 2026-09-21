@@ -9,6 +9,7 @@ const options = {
   format: 'cjs',
   platform: 'browser',
   target: 'es2018',
+  minify: !watch,
   sourcemap: watch ? 'inline' : false,
   logLevel: 'info',
 };

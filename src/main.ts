@@ -11,21 +11,6 @@ export default class SymlinkNotesPlugin extends Plugin {
   onload(): void {
     this.manager = new SymlinkManager(this.app);
     const { vault, metadataCache, workspace } = this.app;
-    void this.manager.enqueue(() => this.manager.rebuildIndex(), 'Could not build symlink index');
-
-    this.registerEvent(vault.on('create', file => this.manager.onFileChanged(file)));
-    this.registerEvent(vault.on('modify', file => this.manager.onFileChanged(file)));
-    this.registerEvent(metadataCache.on('changed', file => this.manager.onFileChanged(file)));
-    this.registerEvent(vault.on('delete', file => {
-      void this.manager.enqueue(async () => this.manager.remove(file), 'Could not remove symlink from index');
-    }));
-    this.registerEvent(vault.on('rename', (file, oldPath) => {
-      // Capture the new path before another rename mutates the same TFile object.
-      const newPath = file.path;
-      const folder = file instanceof TFolder;
-      void this.manager.enqueue(() => this.manager.handleRename(oldPath, newPath, folder), 'Could not update renamed targets');
-      if (!folder) this.manager.onFileChanged(file);
-    }));
 
     this.registerEvent(workspace.on('file-open', file => {
       for (const leaf of workspace.getLeavesOfType('markdown')) {
@@ -40,12 +25,29 @@ export default class SymlinkNotesPlugin extends Plugin {
     }));
     this.registerEvent(workspace.on('layout-change', () => this.checkOpenLeaves()));
     workspace.onLayoutReady(() => {
-      if (!this.unloaded) this.checkOpenLeaves();
+      if (this.unloaded) return;
+      void this.manager.enqueue(() => this.manager.rebuildIndex(), 'Could not build symlink index');
+
+      this.registerEvent(vault.on('create', file => this.manager.onFileChanged(file)));
+      this.registerEvent(vault.on('modify', file => this.manager.onFileChanged(file)));
+      this.registerEvent(metadataCache.on('changed', file => this.manager.onFileChanged(file)));
+      this.registerEvent(vault.on('delete', file => {
+        void this.manager.enqueue(async () => this.manager.remove(file), 'Could not remove symlink from index');
+      }));
+      this.registerEvent(vault.on('rename', (file, oldPath) => {
+        // Capture the new path before another rename mutates the same TFile object.
+        const newPath = file.path;
+        const folder = file instanceof TFolder;
+        void this.manager.enqueue(() => this.manager.handleRename(oldPath, newPath, folder), 'Could not update renamed targets');
+        if (!folder) this.manager.onFileChanged(file);
+      }));
+
+      this.checkOpenLeaves();
     });
 
     this.addCommand({
       id: 'create-symlink-to-current-note',
-      name: 'Create symlink to current note',
+      name: 'Create symlink to active note',
       checkCallback: checking => {
         const file = workspace.getActiveFile();
         if (!file || file.extension !== 'md') return false;

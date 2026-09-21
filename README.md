@@ -23,7 +23,7 @@ The generated `main.js` is the desktop/mobile plugin bundle. No stylesheet or ru
 
 ## Use
 
-Open a Markdown note and run **Symlink Notes: Create symlink to current note** from the command palette. Choose an existing folder, or `/ (vault root)`. The shortcut uses the active note's filename. Creation leaves the active note open and refuses to overwrite an existing file or folder. Paths in generated YAML are quoted to preserve special characters.
+Open a Markdown note and run **Symlink Notes: Create symlink to active note** from the command palette. Choose an existing folder, or `/ (vault root)`. The shortcut uses the active note's filename. Creation leaves the active note open and refuses to overwrite an existing file or folder. Paths in generated YAML are quoted to preserve special characters.
 
 Renaming or moving a target, including moving its containing folder, updates the `symlink` property of incoming shortcuts. Other properties and the note body are preserved; Obsidian may reformat YAML during its frontmatter update. Moving a shortcut itself leaves its target unchanged. Targets must be moved while the plugin is enabled for automatic updates to occur.
 

@@ -261,6 +261,7 @@ test('lifecycle events maintain the index for created, edited, deleted and rapid
   const target = f.add('Target.md');
   const plugin = new SymlinkNotesPlugin(f.app);
   plugin.onload();
+  f.app.workspace.ready();
   await settle();
   const created = f.add('Created.md', shortcut('Target.md'));
   const edited = f.add('Edited.md', 'ordinary');
@@ -299,6 +300,7 @@ test('rapid folder moves preserve targets even when shortcuts move with the fold
   const outside = f.add('Outside.md', shortcut('Projects/Target.md'));
   const plugin = new SymlinkNotesPlugin(f.app);
   plugin.onload();
+  f.app.workspace.ready();
   await settle();
   f.rename(folder, 'First');
   f.rename(folder, 'Final');
