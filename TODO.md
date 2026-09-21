@@ -21,8 +21,8 @@ Pre-submission checklist for Symlink Notes.
 - [x] Run `npm test`.
 - [x] Run `npm run build`.
 - [x] Confirm `main.js` is generated successfully.
-- [ ] Run the desktop smoke test in a disposable vault.
-- [ ] Test on mobile because `isDesktopOnly` is `false`.
+- [x] Run the desktop smoke test in a disposable vault.
+- [x] Test on mobile because `isDesktopOnly` is `false`.
 
 ## Release readiness
 
