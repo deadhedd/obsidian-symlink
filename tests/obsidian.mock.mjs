@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import { parse, stringify } from 'yaml';
 
 export const notices = [];
 export class Notice {
@@ -32,7 +32,7 @@ export function getFrontMatterInfo(content) {
   const match = /^\uFEFF?---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(content);
   return { exists: Boolean(match), frontmatter: match?.[1] ?? '', contentStart: match?.[0].length ?? 0 };
 }
-export const parseYaml = yaml.load;
+export const parseYaml = parse;
 
 class Events {
   callbacks = new Map();
@@ -81,7 +81,7 @@ export function fixture() {
       const frontmatter = parseYaml(info.frontmatter) ?? {};
       update(frontmatter);
       writes.push(file.path);
-      contents.set(file, `---\n${yaml.dump(frontmatter)}---\n${original.slice(info.contentStart)}`);
+      contents.set(file, `---\n${stringify(frontmatter)}---\n${original.slice(info.contentStart)}`);
       vault.trigger('modify', file);
     },
   };

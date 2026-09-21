@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/node": "^18.19.0",
     "esbuild": "^0.25.0",
-    "js-yaml": "^4.1.0",
+    "yaml": "^2.8.1",
     "obsidian": "^1.8.7",
     "typescript": "^5.8.0"
   }
