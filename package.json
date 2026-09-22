@@ -3,15 +3,19 @@
   "version": "0.1.1",
   "private": true,
   "description": "Portable Markdown-native shortcuts for Obsidian notes.",
+  "engines": {
+    "node": "^22.0.0 || ^24.0.0"
+  },
   "scripts": {
     "dev": "node esbuild.config.mjs --watch",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && node esbuild.config.mjs",
     "test": "node tests/run.mjs",
-    "check": "npm run typecheck && npm test && npm run build"
+    "check": "npm run typecheck && npm test && npm run build",
+    "release:check": "node scripts/release-check.mjs"
   },
   "devDependencies": {
-    "@types/node": "^18.19.0",
+    "@types/node": "^22.0.0",
     "esbuild": "^0.25.0",
     "yaml": "^2.8.1",
     "obsidian": "^1.8.7",

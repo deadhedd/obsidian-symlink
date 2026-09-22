@@ -26,19 +26,21 @@ Pre-submission checklist for Symlink Notes.
 
 ## Release readiness
 
-- [x] Confirm `manifest.json` version is `0.1.0`.
-- [x] Confirm `package.json` version is `0.1.0`.
-- [x] Confirm `versions.json` contains the matching `0.1.0` mapping.
+- [x] Confirm `manifest.json` version is `0.1.1`.
+- [x] Confirm `package.json` version is `0.1.1`.
+- [x] Confirm `versions.json` contains the matching `0.1.1` mapping.
 - [x] Confirm `LICENSE` and `README.md` are present and current.
 - [x] Confirm generated `main.js` is not committed to the repository.
 
 ## Release
 
-- [ ] Create GitHub release/tag `0.1.0` (not `v0.1.0`).
-- [ ] Attach `main.js` to the release.
-- [ ] Attach `manifest.json` to the release.
-- [ ] Download the release assets and install those exact files into a clean test vault.
-- [ ] Verify the released plugin enables and works correctly.
+- [x] Build the repository owned artifact with `npm ci` and `npm run release:check`; verify it contains only `main.js` and `manifest.json`.
+- [x] Create Git tag `0.1.1` (not `v0.1.1`).
+- [x] Create GitHub release `0.1.1`.
+- [x] Attach `main.js` to the release.
+- [x] Attach `manifest.json` to the release.
+- [ ] Copy the exact `release/main.js` and `release/manifest.json` from the successful artifact build unchanged into a clean Desktop vault and a clean Mobile vault.
+- [ ] Complete the release smoke path on both platforms, copy `docs/release-verification/template.md` to `docs/release-verification/<version>.md`, record the version, hashes, environments, outcomes, notes, and limitations, and check in the record even when a platform is `Fail` or `Blocked`.
 
 ## Submission
 

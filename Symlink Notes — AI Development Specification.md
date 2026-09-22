@@ -1149,7 +1149,7 @@ Create shortcuts, close Obsidian, restart Obsidian, and verify that all shortcut
 
 # 22. MVP Definition
 
-Version `0.1.0` requires only:
+The current `0.1.1` release requires only:
 
 - recognition of `symlink:` frontmatter
 - redirect on open
