@@ -7,7 +7,8 @@
     "dev": "node esbuild.config.mjs --watch",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && node esbuild.config.mjs",
-    "test": "node tests/run.mjs"
+    "test": "node tests/run.mjs",
+    "check": "npm run typecheck && npm test && npm run build"
   },
   "devDependencies": {
     "@types/node": "^18.19.0",
