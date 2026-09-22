@@ -1,6 +1,6 @@
 # Symlink Notes
 
-Portable Markdown shortcuts for Obsidian Desktop and Mobile. Version 0.1.0 requires Obsidian 1.5.7 or newer.
+Portable Markdown shortcuts for Obsidian Desktop and Mobile. Version 0.1.1 requires Obsidian 1.5.7 or newer.
 
 A shortcut is an ordinary note:
 
@@ -14,12 +14,12 @@ Opening it opens the target in the same tab. The target contains the canonical c
 
 ## Install
 
-1. Run `npm ci` and `npm run build` (Node.js 18 or newer).
+1. Run `npm ci` and `npm run release:check` with Node.js 22 or Node.js 24. These are the supported Node.js lines for repository development, builds, and verification only. Node.js is not part of the Obsidian plugin runtime contract.
 2. Create `<vault>/.obsidian/plugins/symlink-notes/`.
-3. Copy `main.js` and `manifest.json` into that folder.
+3. Copy `release/main.js` and `release/manifest.json` into that folder.
 4. Reload Obsidian and enable **Symlink Notes** in **Settings** → **Community plugins**.
 
-The generated `main.js` is the desktop/mobile plugin bundle. No stylesheet or runtime npm dependencies are needed. Build on a computer, then copy those two files to a mobile vault to install there.
+The release command runs the canonical repository check before creating `release/`. It creates exactly `main.js` and `manifest.json`, then reports the version, output directory, and lowercase SHA 256 hashes for both files. No stylesheet or runtime npm dependencies are needed. Build on a computer, then copy those two files to a mobile vault to install there.
 
 ## Use
 
@@ -49,11 +49,16 @@ Symlink Notes is licensed under the [MIT License](LICENSE).
 
 ```sh
 npm ci
-npm test
-npm run build
+npm run check
 ```
 
-`npm run dev` watches and rebuilds `main.js`. `npm run typecheck` checks strict TypeScript independently.
+`npm run check` is the canonical repository verification command. It runs strict TypeScript checking, the test suite, and the production build in that order. `npm run dev` watches and rebuilds `main.js`. `npm run typecheck` checks strict TypeScript independently.
+
+For a repository owned release artifact, run `npm ci` followed by `npm run release:check`. The command uses the successful production build and validated metadata, and refuses to remove unexpected files already in `release/`. The `release/` directory is ignored by Git.
+
+## Release verification evidence
+
+After `npm run release:check` succeeds, use the exact `release/main.js` and `release/manifest.json` it produced. Copy those files unchanged into a clean Desktop vault and a clean Mobile vault, then complete the smoke path in `docs/release-verification/template.md`. Copy the template to `docs/release-verification/<version>.md`, fill in the command output and test results, and check in the record even when a platform is `Fail` or `Blocked`. Stop if either recorded SHA 256 hash does not match the files under test.
 
 Tests use Node's test runner with an in-memory Obsidian API mock and real YAML parsing. They cover resolution, creation, collisions, rename/move events, metadata/body preservation, restart reconstruction, invalid targets, loops, depth limits, background leaves, navigation races, unload, and write failures. They do not replace testing the plugin inside Obsidian.
 
